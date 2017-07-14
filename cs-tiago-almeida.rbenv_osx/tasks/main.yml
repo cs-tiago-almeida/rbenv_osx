@@ -1,0 +1,11 @@
+---
+- name: Install libraries with homebrew
+  homebrew: name={{ item }} state=present
+  with_items:
+    - rbenv
+    - ruby-build
+
+- lineinfile: dest=~/.bash_profile line='if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' state=present
+
+- name: Load rbenv
+  shell: source ~/.bash_profile
